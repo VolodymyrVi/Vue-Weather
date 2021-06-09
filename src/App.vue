@@ -2,7 +2,12 @@
   <div id="app">
     <main>
       <div class="search-box">
-        <input type="text" class="search-bar" placeholder="Search..."/>
+        <input type="text" class="search-bar" placeholder="Search..."
+        v-model="query"
+        @keypress="fetchWeather"
+         />
+         
+
       </div>
 
       <div class="weather-wrap">
@@ -22,26 +27,32 @@
 
 <script>
 export default {
-  name: 'App',
-  data () {
+  name: "App",
+  data() {
     return {
-      api_key: 'ccad5e96297a2d4d82828e7127b1732d'
-    }
+      api_key: "ccad5e96297a2d4d82828e7127b1732d",
+      url_base: 'https://api.openweathermap.org/data/2.5/',
+      query: '',
+      weather: {}
+    };
+  },
+  methods:{
+     
   }
-}
+};
 </script>
 
 <style>
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-body{
-  font-family: 'montserrat', sans-serif;
+body {
+  font-family: "montserrat", sans-serif;
 }
 #app {
-  background-image: url('./assets/cold-bg.jpg');
+  background-image: url("./assets/cold-bg.jpg");
   background-size: cover;
   background-position: bottom;
   transition: 0.4s;
@@ -49,7 +60,11 @@ body{
 main {
   min-height: 100vh;
   padding: 25px;
-  background-image: linear-gradient(to bottom, rgba(0,0,0, 0.25), rgba(0,0,0, 0.75));
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.25),
+    rgba(0, 0, 0, 0.75)
+  );
 }
 .search-box {
   width: 100%;
@@ -64,17 +79,17 @@ main {
   appearance: none;
   border: none;
   outline: none;
-  background: none; 
+  background: none;
 
-  box-shadow: 0px 0px 8px rgba(0,0,0, 0.25);
-  background-color: rgba(255,255,255, 0.5);
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  background-color: rgba(255, 255, 255, 0.5);
   border-radius: 0px 16px 0px 16px;
   transition: 0.4s;
 }
 
 .search-box .search-bar:focus {
-  box-shadow: 0px 0px 16px rgba(0,0,0, 0.25);
-  background-color: rgba(255,255,255, 0.75);
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
+  background-color: rgba(255, 255, 255, 0.75);
   border-radius: 16px 0px 16px 0px;
 }
 .location-box .location {
@@ -82,7 +97,7 @@ main {
   font-size: 32px;
   font-weight: 500;
   text-align: center;
-  text-shadow: 1px 3px rgba(0,0,0, 0.25);
+  text-shadow: 1px 3px rgba(0, 0, 0, 0.25);
 }
 .location-box .date {
   color: white;
@@ -100,11 +115,11 @@ main {
   color: #fff;
   font-size: 102px;
   font-weight: 900;
-  text-shadow: 3px 6px rgba(0,0,0, 0.25);
-  background-color: rgba(255,255,255, 0.25);
+  text-shadow: 3px 6px rgba(0, 0, 0, 0.25);
+  background-color: rgba(255, 255, 255, 0.25);
   border-radius: 16px;
   margin: 30px 0px;
-  box-shadow: 3px 6px rgba(0,0,0, 0.25);
+  box-shadow: 3px 6px rgba(0, 0, 0, 0.25);
 }
 
 .weather-box .weather {
@@ -112,6 +127,6 @@ main {
   font-size: 48px;
   font-weight: 700;
   font-style: italic;
-  text-shadow: 3px 6px rgba(0,0,0, 0.25);
+  text-shadow: 3px 6px rgba(0, 0, 0, 0.25);
 }
 </style>
